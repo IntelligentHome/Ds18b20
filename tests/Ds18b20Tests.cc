@@ -107,8 +107,8 @@ TEST(Ds18b20, GetTemp) {
 
     ds18b20::Temp temp = thermometer.GetTemp();
 
-    EXPECT_TRUE(get_data[0] == temp.low_value);
-    EXPECT_TRUE(get_data[1] == temp.high_value);
+    EXPECT_TRUE(get_data[1] == temp.low_value);
+    EXPECT_TRUE(get_data[0] == temp.high_value);
 
     EXPECT_TRUE(expected_recv.size() == recv_data.size());
 

@@ -34,8 +34,8 @@ Temp Ds18b20::GetTemp(void) {
         uint8_t get_data[] = { 0x00, 0x00 };
         this->transport_.Get(get_data, sizeof(get_data));
 
-        temp.high_value = get_data[0];
-        temp.low_value = get_data[1];
+        temp.high_value = get_data[1];
+        temp.low_value = get_data[0];
     }
 
     this->transport_.Reset();
