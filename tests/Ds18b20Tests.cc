@@ -1,6 +1,7 @@
 #include "gtest/gtest.h"
 #include "Ds18b20.h"
 #include <vector>
+#include <memory>
 
 namespace test_Ds18b20 {
 
