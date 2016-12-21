@@ -13,9 +13,15 @@ Ds18b20::Ds18b20(
 
 Temp Ds18b20::GetTemp(void) {
 
+    uint8_t is_present;
     Temp temp = { { 0 } };
 
-    this->transport_.Reset();
+    is_present = this->transport_.Reset();
+
+    if (is_present == 0) {
+        temp.value = -1;
+        return temp;
+    }
 
     {
         uint8_t send_data[] = { 0xCC, 0x44 };
