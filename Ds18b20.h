@@ -5,6 +5,8 @@
 
 namespace ds18b20 {
 
+#define DS18B20_INVALID 0x5555
+
 union Temp {
     struct {
         uint8_t low_value;

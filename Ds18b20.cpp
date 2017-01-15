@@ -19,7 +19,7 @@ Temp Ds18b20::GetTemp(void) {
     is_present = this->transport_.Reset();
 
     if (is_present == 0) {
-        temp.value = -1;
+        temp.value = DS18B20_INVALID;
         return temp;
     }
 

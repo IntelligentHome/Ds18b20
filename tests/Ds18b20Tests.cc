@@ -38,7 +38,7 @@ public:
 
     virtual uint8_t Reset(void) {
         recv_data.push_back(std::unique_ptr<TestStruct>(new TestStruct(TYPE_TRANSPORT_RESET, 0)));
-        return 0;
+        return 1;
     }
 
     virtual void Send(uint8_t send_buff[], uint16_t size) {
@@ -108,14 +108,28 @@ TEST(Ds18b20, GetTemp) {
 
     ds18b20::Temp temp = thermometer.GetTemp();
 
-    EXPECT_TRUE(get_data[1] == temp.low_value);
-    EXPECT_TRUE(get_data[0] == temp.high_value);
+    EXPECT_TRUE(get_data[1] == temp.low_value)      \
+            << "Expected: " << (int)temp.low_value  \
+            << " Got: " << (int)get_data[0];
 
-    EXPECT_TRUE(expected_recv.size() == recv_data.size());
+    EXPECT_TRUE(get_data[0] == temp.high_value)     \
+            << "Expected: " << (int)temp.high_value \
+            << " Got: " << (int)get_data[1];
+
+    EXPECT_TRUE(expected_recv.size() == recv_data.size())   \
+            << "Expected: " << (int)expected_recv.size()    \
+            << " Got: " << (int)recv_data.size();
 
     for (int i = 0; i < expected_recv.size() && i < recv_data.size(); i++) {
-        EXPECT_TRUE(expected_recv[i].type_ == recv_data[i]->type_);
-        EXPECT_TRUE(expected_recv[i].value_ == recv_data[i]->value_);
+        EXPECT_TRUE(expected_recv[i].type_ == recv_data[i]->type_)  \
+            << "Expected: " << (int)expected_recv[i].type_          \
+            << " Got: " << (int)recv_data[i]->type_                 \
+            << " at: " << i;
+
+        EXPECT_TRUE(expected_recv[i].value_ == recv_data[i]->value_)    \
+            << "Expected: " << (int)expected_recv[i].value_             \
+            << " Got: " << (int)recv_data[i]->value_                    \
+            << " at: " << i;
     }
 }
 
