@@ -14,6 +14,8 @@ union Temp {
     };
 
     uint16_t value;
+
+    uint8_t raw_data[2];
 };
 
 class Ds18b20 {
